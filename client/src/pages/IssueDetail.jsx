@@ -24,13 +24,14 @@ const IssueDetail = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 p-6">
-      <div className="max-w-3xl mx-auto bg-white p-6 rounded-lg shadow-md space-y-6">
-        
+      <div className="max-w-4xl mx-auto bg-white p-6 rounded-2xl shadow-lg space-y-8">
+
+        {/* Issue Title & Status */}
         <div>
-          <h1 className="text-2xl font-bold mb-2">{dummyIssue.title}</h1>
-          <div className="flex items-center gap-4 mb-4">
-            <span className="text-sm px-2 py-1 rounded bg-blue-100 text-blue-600">{dummyIssue.category}</span>
-            <span className={`text-sm px-2 py-1 rounded ${
+          <h1 className="text-3xl font-bold text-gray-800 mb-2">{dummyIssue.title}</h1>
+          <div className="flex flex-wrap items-center gap-3">
+            <span className="text-sm px-3 py-1 rounded-full bg-blue-100 text-blue-600">{dummyIssue.category}</span>
+            <span className={`text-sm px-3 py-1 rounded-full ${
               currentStatus === 'Reported' ? 'bg-yellow-100 text-yellow-600' :
               currentStatus === 'In Progress' ? 'bg-blue-100 text-blue-600' :
               'bg-green-100 text-green-600'
@@ -40,10 +41,16 @@ const IssueDetail = () => {
           </div>
         </div>
 
+        {/* Image Gallery */}
         <ImageGallery images={dummyIssue.images} />
 
-        <p className="text-gray-700">{dummyIssue.description}</p>
+        {/* Description */}
+        <div>
+          <h3 className="text-lg font-semibold mb-2">Issue Description</h3>
+          <p className="text-gray-700 leading-relaxed">{dummyIssue.description}</p>
+        </div>
 
+        {/* Timeline */}
         <div>
           <h3 className="text-lg font-semibold mb-2">Status Timeline</h3>
           <div className="space-y-3">
@@ -57,12 +64,14 @@ const IssueDetail = () => {
           </div>
         </div>
 
+        {/* Action Buttons */}
         <div className="flex gap-4">
-          <button className="px-4 py-2 rounded bg-green-500 text-white hover:bg-green-600">Upvote</button>
-          <button className="px-4 py-2 rounded bg-red-500 text-white hover:bg-red-600">Downvote</button>
-          <button className="ml-auto px-4 py-2 rounded bg-gray-200 text-sm">Flag as Spam</button>
+          <button className="flex-1 py-2 rounded-lg bg-green-500 text-white hover:bg-green-600">Upvote</button>
+          <button className="flex-1 py-2 rounded-lg bg-red-500 text-white hover:bg-red-600">Downvote</button>
+          <button className="flex-1 py-2 rounded-lg bg-gray-300 text-gray-700 hover:bg-gray-400">Flag as Spam</button>
         </div>
 
+        {/* Comments Section */}
         <CommentThread comments={dummyIssue.comments} />
 
       </div>

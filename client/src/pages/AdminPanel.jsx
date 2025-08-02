@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import FlaggedIssue from '../components/FlaggedIssue';
+import FlaggedIssueCard from '../components/FlaggedIssue'; // ✅ Ensure file name is correct (FlaggedIssue.jsx)
 import CategoryManagement from '../components/CategoryManagement';
 
 const dummyFlaggedIssues = [
@@ -37,7 +37,7 @@ const AdminPanel = () => {
               />
             ))
           ) : (
-            <p>No flagged issues pending.</p>
+            <p className="text-gray-600">No flagged issues pending.</p>
           )}
         </div>
 

@@ -43,7 +43,6 @@ const ReportIssue = () => {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
       alert('Issue Reported Successfully!');
-      // Reset Form
       setForm({
         title: '',
         description: '',
@@ -58,59 +57,65 @@ const ReportIssue = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 p-6 max-w-lg mx-auto mt-10 bg-white rounded shadow">
-      <h2 className="text-xl font-bold text-center">Report an Issue</h2>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-white">
+      <form onSubmit={handleSubmit} className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-xl space-y-6">
+        <h2 className="text-2xl font-bold text-center text-gray-700">Report an Issue</h2>
 
-      <input
-        name="title"
-        placeholder="Title"
-        value={form.title}
-        onChange={handleChange}
-        className="w-full p-2 border rounded"
-      />
+        <div className="space-y-4">
+          <input
+            name="title"
+            placeholder="Issue Title"
+            value={form.title}
+            onChange={handleChange}
+            className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none"
+          />
 
-      <textarea
-        name="description"
-        placeholder="Description"
-        value={form.description}
-        onChange={handleChange}
-        className="w-full p-2 border rounded"
-      />
+          <textarea
+            name="description"
+            placeholder="Describe the issue"
+            value={form.description}
+            onChange={handleChange}
+            rows={4}
+            className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none"
+          ></textarea>
 
-      <input
-        name="category"
-        placeholder="Category"
-        value={form.category}
-        onChange={handleChange}
-        className="w-full p-2 border rounded"
-      />
+          <input
+            name="category"
+            placeholder="Category"
+            value={form.category}
+            onChange={handleChange}
+            className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none"
+          />
 
-      <div className="flex items-center gap-2">
-        <input
-          type="checkbox"
-          name="anonymous"
-          checked={form.anonymous}
-          onChange={handleChange}
-        />
-        <label>Report Anonymously</label>
-      </div>
+          <div className="flex items-center gap-2">
+            <input
+              type="checkbox"
+              name="anonymous"
+              checked={form.anonymous}
+              onChange={handleChange}
+              className="w-4 h-4"
+            />
+            <label className="text-sm">Report Anonymously</label>
+          </div>
 
-      <input
-        type="file"
-        name="photos"
-        multiple
-        accept="image/*"
-        onChange={handleChange}
-        className="w-full"
-      />
+          <input
+            type="file"
+            name="photos"
+            multiple
+            accept="image/*"
+            onChange={handleChange}
+            className="w-full"
+          />
+        </div>
 
-      <button
-        type="submit"
-        className="w-full py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-      >
-        Submit Issue
-      </button>
-    </form>
+        <button
+          type="submit"
+          className="w-full py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+        >
+          Submit Issue
+        </button>
+      </form>
+    </div>
   );
 };
 
