@@ -1,51 +1,60 @@
 import React, { useState } from 'react';
-import InputField from '../components/InputField';
+import api from '../api/axiosConfig';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [form, setForm] = useState({ username: '', password: '' });
+  const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    if (!email || !password) {
-      alert('Please fill in all fields.');
+
+    if (!form.username || !form.password) {
+      alert('Please enter both username and password.');
       return;
     }
-    // Dummy login action
-    console.log('Logged in as:', email);
+
+    api.post('/login', form)
+      .then(() => {
+        alert('Login Successful!');
+        navigate('/');
+      })
+      .catch(err => {
+        console.error('Login Failed', err);
+        alert('Invalid credentials!');
+      });
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="bg-white p-8 rounded-xl shadow-lg w-full max-w-sm">
-        <h2 className="text-2xl font-semibold text-center mb-6">CivicTrack Login</h2>
-        <form onSubmit={handleLogin}>
-          <InputField
-            label="Email"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Enter your email"
-          />
-          <InputField
-            label="Password"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Enter your password"
-          />
-          <button
-            type="submit"
-            className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition duration-300"
-          >
-            Login
-          </button>
-        </form>
-        <div className="mt-4 text-center">
-          <button className="text-sm text-blue-600 hover:underline">Continue as Guest</button>
-        </div>
-      </div>
-    </div>
+    <form onSubmit={handleSubmit} className="space-y-4 p-6 max-w-sm mx-auto mt-10 bg-white rounded shadow">
+      <h2 className="text-xl font-bold text-center">Login</h2>
+      <input
+        name="username"
+        placeholder="Username"
+        value={form.username}
+        onChange={handleChange}
+        className="w-full p-2 border rounded"
+      />
+      <input
+        name="password"
+        type="password"
+        placeholder="Password"
+        value={form.password}
+        onChange={handleChange}
+        className="w-full p-2 border rounded"
+      />
+      <button
+        type="submit"
+        className="w-full py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+      >
+        Login
+      </button>
+    </form>
   );
 };
 

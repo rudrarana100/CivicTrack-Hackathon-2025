@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import FlaggedIssueCard from '../components/FlaggedIssue';
+import FlaggedIssue from '../components/FlaggedIssue';
 import CategoryManagement from '../components/CategoryManagement';
 
 const dummyFlaggedIssues = [
